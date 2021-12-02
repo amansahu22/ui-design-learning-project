@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import logo from '../../assests/logo.svg'
-import './Navbar.css'
+import './Navbar.css';
+
+const NavLinks = () => {
+    return (
+        <React.Fragment>
+            <p><a href='#home'>Home</a></p>
+            <p><a href='#wgpt3'>What is GPT?</a></p>
+            <p><a href='#possibility'>Open AI</a></p>
+            <p><a href='#features'>Case Studies</a></p>
+            <p><a href='#blog'>Library</a></p>
+        </React.Fragment>
+    );
+}
 
 const Navbar = () => {
+    const [toggleButton, setToggleButton] = useState(false);
     return (
         <div className='gpt3__navbar'>
             <div className='gpt3__navbar-links'>
@@ -11,16 +24,28 @@ const Navbar = () => {
                     <img src={logo} alt='logo' />
                 </div>
                 <div className='gpt3__navbar-links_container'>
-                    <p><a href='#home'>Home</a></p>
-                    <p><a href='#wgpt3'>What is GPT?</a></p>
-                    <p><a href='#possibility'>Open AI</a></p>
-                    <p><a href='#features'>Case Studies</a></p>
-                    <p><a href='#blog'>Library</a></p>
+                    <NavLinks />
                 </div>
             </div>
             <div className='gpt3__navbar-sign'>
                 <p>Sign in</p>
                 <button type='button'>Sign Up</button>
+            </div>
+            <div className='gpt3__navbar-menu'>
+                {toggleButton ? <RiCloseLine color='#fff' size={27} onClick={() => { setToggleButton(false) }} />
+                    : <RiMenu3Line color='#fff' size={27} onClick={() => { setToggleButton(true) }} />
+                }
+                {toggleButton && (
+                    <div className='gpt3__navbar-menu_container scale-up-center'>
+                        <div className='gpt3__navbar-menu_container-links' >
+                            <NavLinks />
+                            <div className='gpt3__navbar-menu_container-links-sign'>
+                                <p>Sign in</p>
+                                <button type='button'>Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )
